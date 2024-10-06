@@ -4,7 +4,6 @@ from sqlalchemy import sql
 
 from database.core import session_factory
 from database.types import MT
-from database.types.tables_params_dicts import AddData
 from .base import ITableManager
 
 
