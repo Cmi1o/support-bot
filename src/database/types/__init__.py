@@ -1,2 +1,2 @@
-from .tables_params_dicts import FilterData, UpdateDataDict
+from .tables_params_dicts import *
 from .generics import *
