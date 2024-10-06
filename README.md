@@ -21,12 +21,12 @@
 
 ## :dart: About ##
 
-Telegram bot for support. Your client write to this bot and it creates communication between owner and client using Telegram topics
+Telegram bot for support. Your client write to this bot and it creates communication between him and admin using Telegram topics
 
 ## :sparkles: Features ##
 
 :heavy_check_mark: Automatic cleaning of inactive users in database\
-:heavy_check_mark: Infinity people can answer to client questions. You just need to add them the group;\
+:heavy_check_mark: Infinity count of people can answer to clients questions, you just need to add them to the group
 
 ## :rocket: Technologies ##
 
@@ -41,7 +41,7 @@ The following tools were used in this project:
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com), [Python](https://www.python.org/downloads/release/python-3115/) and [PostgreSQL](https://www.postgresql.org/) installed. 
 
-Also you need to create new PostgreSQL database with structure:
+Also you need to create new PostgreSQL database in accordance with this structure:
 
 |Table name    | Column name  | Data type                                              |
 | :----------: | :----------: | :----------------------------------------------------: |
