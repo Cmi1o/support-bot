@@ -1,15 +1,12 @@
 from abc import ABC, abstractmethod
-from typing import Any, Unpack, AsyncGenerator
+from typing import Generic, Unpack, AsyncGenerator
 
 from database.types import *
 
 
-class ITableManager(ABC):
+class ITableManager(ABC, Generic[MT]):
     @abstractmethod
-    def __init__(self, **negative_settings: Any) -> None: ...
-    
-    @abstractmethod
-    def get_all(self) -> AsyncGenerator[Any, None]:
+    def get_all(self) -> AsyncGenerator[MT, None]:
         '''Asynchronous generator for getting all rows from table
         
         Yields
@@ -21,7 +18,7 @@ class ITableManager(ABC):
     def get_many_with(
         self, 
         **filter_data: Unpack[FilterData]
-    ) -> AsyncGenerator[Any, None]:
+    ) -> AsyncGenerator[MT, None]:
         '''Asynchronous generator for getting rows from table with filter data
         
         Parameters
@@ -35,7 +32,7 @@ class ITableManager(ABC):
         '''
     
     @abstractmethod
-    def get_by(self, **filter_data: Unpack[FilterData]) -> Any | None:
+    def get_by(self, **filter_data: Unpack[FilterData]) -> MT | None:
         '''Asynchronous method for getting row from table by `filter_data`
         
         Parameters
