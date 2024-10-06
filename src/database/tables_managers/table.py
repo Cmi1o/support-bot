@@ -1,9 +1,10 @@
-from typing import Any, AsyncGenerator, Generic
+from typing import AsyncGenerator, Generic, Unpack
 
 from sqlalchemy import sql
 
 from database.core import session_factory
 from database.types import MT
+from database.types.tables_params_dicts import AddData
 from .base import ITableManager
 
 
@@ -32,3 +33,24 @@ class Table(ITableManager, Generic[MT]):
                     **filter_data
                 )
             )
+    
+    async def update_by(self, values, **filter_data) -> None:
+        stmt = sql.update(self.__table).filter_by(**filter_data)
+        
+        async with session_factory() as session:
+            await session.execute(stmt.values(**values))
+            await session.commit()
+    
+    async def add(self, **data) -> None:
+        async with session_factory() as session:
+            session.add(self.__table(**data))
+            await session.commit()
+    
+    async def delete_by(self, **filter_data) -> None:
+        async with session_factory() as session:
+            await session.execute(
+                sql.delete(self.__table).filter_by(
+                    **filter_data
+                )
+            )
+            await session.commit()
