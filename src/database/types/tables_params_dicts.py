@@ -20,4 +20,4 @@ class FilterData(UpdateDataDict, total=False):
 
 
 class AddData(UpdateDataDict, total=False):
-    id: int
+    id: int | None
