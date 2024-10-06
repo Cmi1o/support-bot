@@ -70,3 +70,14 @@ class ITableManager(ABC, Generic[MT]):
         data : AddData
             `TypedDict` with valid data for add
         '''
+    
+    
+    @abstractmethod
+    def delete_by(self, **filter_data: Unpack[FilterData]) -> None:
+        '''Delete row from table by given `filter_data`
+        
+        Parameters
+        ----------
+        filter_data : Unpack[FilterData]
+            This is a `TypedDict`
+        '''
