@@ -46,7 +46,7 @@ class ITableManager(ABC, Generic[MT]):
         '''
     
     @abstractmethod
-    async def update_by(
+    def update_by(
         self,
         values: UpdateDataDict,
         **filter_data: Unpack[FilterData]
