@@ -1,7 +1,6 @@
 import datetime
 
 import app.utils.keyboards as kb
-import app.utils.topics_interactions as topics
 import requests
 
 
@@ -9,6 +8,7 @@ from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 
+from app.utils import topics
 from app.utils.states import SupportStates
 from config import bot_token, forum_topic_id
 from database import controller
