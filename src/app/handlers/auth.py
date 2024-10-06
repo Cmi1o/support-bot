@@ -39,7 +39,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
     if not message.from_user: return
     
     data = await state.get_data()
-    user =  await controller.users.get_by(telegram_id=message.from_user.id)
+    user = await controller.users.get_by(telegram_id=message.from_user.id)
     
     await state.clear()
     
@@ -52,7 +52,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         topic_response = await topic_response.json()
         
         await controller.users.update_by(
-            telegram_id=user.telegram_id, 
+            telegram_id=user.telegram_id,
             values={
                 'thread_id': topic_response['result']['message_thread_id']
             }
@@ -60,17 +60,17 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         user = await controller.users.get_by(telegram_id=message.from_user.id)
     
     await requests.send_copy(
-        message=data['message'], 
+        message=data['message'],
         chat_id=forum_topic_id,
         message_thread_id=user.thread_id  # type: ignore
     )
     await controller.users.update_by(
-        telegram_id=message.from_user.id, 
+        telegram_id=message.from_user.id,
         values={
             'added_time': datetime.datetime.now()
         }
     )
-    await message.answer(   
+    await message.answer(
         text='Ваше сообщение отправлено администратору', 
         reply_markup=kb.remove
     )
