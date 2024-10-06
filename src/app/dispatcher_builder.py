@@ -1,6 +1,13 @@
 from aiogram import Bot
 from aiogram.types import BotName
 
+from app.gather_routers import gather_routers
+from app.handlers import (
+    callback, 
+    command, 
+    message
+)
+
 
 __all__ = (
     'on_startup',
@@ -26,3 +33,10 @@ async def on_startup(bot: Bot) -> None:
 
 async def on_shutdown(bot: Bot) -> None:
     print(f'Finished polling for {await LogBot(bot).in_log()}')
+
+
+router = gather_routers(
+    command.router,
+    callback.router,
+    message.router
+)
