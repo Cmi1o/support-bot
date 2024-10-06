@@ -31,6 +31,6 @@ async def main() -> None:
 if __name__ == '__main__':
     try:
         asyncio.run(main())
-    except (TelegramNetworkError, KeyboardInterrupt) as error:
+    except (KeyboardInterrupt, TelegramNetworkError) as error:
         if isinstance(error, TelegramNetworkError):
             print('Network error')
