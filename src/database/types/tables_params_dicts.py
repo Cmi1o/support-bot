@@ -5,6 +5,7 @@ from typing import TypedDict
 __all__ = (
     'FilterData',
     'UpdateDataDict',
+    'AddData'
 )
 
 
@@ -15,4 +16,8 @@ class UpdateDataDict(TypedDict, total=False):
 
 
 class FilterData(UpdateDataDict, total=False):
+    id: int
+
+
+class AddData(UpdateDataDict, total=False):
     id: int
