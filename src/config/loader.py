@@ -1,11 +1,12 @@
+from pydantic import PostgresDsn, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    bot_token: str
+    bot_token: SecretStr
     admin_id: int
-    database_url: str
-    forum_topic_id: str
+    database_url: PostgresDsn
+    forum_topic_id: SecretStr
     
     model_config = SettingsConfigDict(
         env_file='.env',
