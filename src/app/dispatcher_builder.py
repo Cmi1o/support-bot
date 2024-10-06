@@ -11,7 +11,8 @@ from app.handlers import (
 
 __all__ = (
     'on_startup',
-    'on_shutdown'
+    'on_shutdown',
+    'router'
 )
 
 
