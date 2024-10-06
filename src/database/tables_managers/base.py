@@ -60,3 +60,13 @@ class ITableManager(ABC, Generic[MT]):
         filter_data : Unpack[FilterData]
             This is a `TypedDict`
         '''
+    
+    @abstractmethod
+    def add(self, **data: Unpack[AddData]) -> None:
+        '''Add new row to table with given `data`
+        
+        Parameters
+        ----------
+        data : AddData
+            `TypedDict` with valid data for add
+        '''
