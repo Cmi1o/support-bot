@@ -1,4 +1,4 @@
-from typing import AsyncGenerator, Generic, Unpack
+from typing import AsyncGenerator, Generic
 
 from sqlalchemy import sql
 
