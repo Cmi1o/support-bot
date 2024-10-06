@@ -24,3 +24,11 @@ class Table(ITableManager, Generic[MT]):
         async with session_factory() as session:
             async for row in await session.stream(stmt):
                 yield row[0]
+    
+    async def get_by(self, **filter_data) -> MT | None:
+        async with session_factory() as session:
+            return await session.scalar(
+                sql.select(self.__table).filter_by(
+                    **filter_data
+                )
+            )
