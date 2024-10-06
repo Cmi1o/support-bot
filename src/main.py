@@ -15,6 +15,9 @@ async def main() -> None:
     dp = Dispatcher()
     cleaner = InactiveUsersCleaner(bot_token, forum_topic_id)
     
+    dp.startup.register(on_startup)
+    dp.shutdown.register(on_shutdown)
+    
     dp.update.outer_middleware(middlewares.outer.AntiFlood(1))
     
     dp.include_router(router)
