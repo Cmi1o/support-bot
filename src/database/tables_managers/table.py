@@ -17,3 +17,10 @@ class Table(ITableManager, Generic[MT]):
         async with session_factory() as session:
             async for row in await session.stream(stmt):
                 yield row[0]
+    
+    async def get_many_with(self, **filter_data) -> AsyncGenerator[MT, None]:
+        stmt = sql.select(self.__table).filter_by(**filter_data)
+        
+        async with session_factory() as session:
+            async for row in await session.stream(stmt):
+                yield row[0]
