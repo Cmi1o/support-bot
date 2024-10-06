@@ -13,5 +13,5 @@ __all__ = (
 
 
 big_int = Annotated[int, mapped_column(BigInteger())]
-nullable_int = Annotated[int | None, mapped_column(nullable=True)]
+nullable_int = Annotated[int, mapped_column(nullable=True)]
 time = Annotated[datetime, mapped_column(DateTime())]
