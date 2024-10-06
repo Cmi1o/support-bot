@@ -50,6 +50,8 @@ Also you need to create new PostgreSQL database in accordance with this structur
 |users         | thread_id    | int4(32,0); nullable                                   |
 |users         | added_time   | timestamp(6)                                           |
 
+Besides this you need to create a new forum in Telegram, find out it's chat ID and add it to `.env`
+
 ## :checkered_flag: Starting ##
 
 ```bash
