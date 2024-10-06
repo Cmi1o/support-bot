@@ -16,7 +16,7 @@ router = Router()
 router.include_router(auth_router)
 
 
-@router.message(Command('help'))
+@router.message(Command('help', ignore_case=True))
 async def help(message: Message) -> None:
     await message.answer(
         text='Для того чтоб написать сообщение для поддержки нажмите на кнопку',
@@ -24,7 +24,7 @@ async def help(message: Message) -> None:
     )
 
 
-@router.message(CommandStart(), InChat())
+@router.message(CommandStart(ignore_case=True), InChat())
 async def private_chat_start(message: Message, state: FSMContext) -> None:
     if not message.from_user: return
     
@@ -43,6 +43,6 @@ async def private_chat_start(message: Message, state: FSMContext) -> None:
     )
 
 
-@router.message(CommandStart(), InTopic())
+@router.message(CommandStart(ignore_case=True), InTopic())
 async def topic_start(message: Message) -> None:
     await message.answer('Для просмотра действий доступных админу введите /admin_panel')
