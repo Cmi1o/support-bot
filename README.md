@@ -56,7 +56,7 @@ Besides this you need to create a new forum in Telegram, find out it's chat ID a
 
 ```bash
 # Clone this project
-$ git clone https://github.com/Cmi1o/support-bot
+$ git clone https://github.com/Cmi1o/support-bot.git
 
 # Access
 $ cd support-bot
