@@ -19,14 +19,13 @@ async def create_topic(bot_token: str, forum_id: int | str, name: str) -> Client
         ClientResponse object of the created topic
     '''
     async with aiohttp.ClientSession() as session:
-        response = await session.post(
+        return await session.post(
             url=f'https://api.telegram.org/bot{bot_token}/createForumTopic',
             json={
                 'chat_id': forum_id,
                 'name': name
             }
         )
-        return response
 
 
 async def delete_topic(
