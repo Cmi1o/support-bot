@@ -1,2 +1,2 @@
 from .anti_flood import AntiFlood
-from .authentication import AddToDatabase
+from .authentication import Auth

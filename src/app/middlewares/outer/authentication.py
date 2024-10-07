@@ -8,7 +8,7 @@ from aiogram.types import TelegramObject
 from database import controller
 
 
-class AddToDatabase(BaseMiddleware):
+class Auth(BaseMiddleware):
     async def __call__(
         self,
         handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
