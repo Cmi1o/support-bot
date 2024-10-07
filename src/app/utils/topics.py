@@ -1,6 +1,4 @@
-import aiohttp
-
-from aiohttp import ClientResponse
+from aiohttp import ClientResponse, ClientSession
 
 
 async def create_topic(bot_token: str, forum_id: int | str, name: str) -> ClientResponse:
@@ -18,7 +16,7 @@ async def create_topic(bot_token: str, forum_id: int | str, name: str) -> Client
     ClientResponse
         ClientResponse object of the created topic
     '''
-    async with aiohttp.ClientSession() as session:
+    async with ClientSession() as session:
         return await session.post(
             url=f'https://api.telegram.org/bot{bot_token}/createForumTopic',
             json={
@@ -32,8 +30,8 @@ async def delete_topic(
     bot_token: str, 
     forum_id: int | str, 
     message_thread_id: int
-) -> aiohttp.ClientResponse:
-    async with aiohttp.ClientSession() as session:
+) -> ClientResponse:
+    async with ClientSession() as session:
         return await session.post(
             url=f'https://api.telegram.org/bot{bot_token}/deleteForumTopic',
             json={
