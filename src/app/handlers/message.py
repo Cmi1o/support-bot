@@ -13,16 +13,6 @@ from database import controller
 
 router = Router()
 
-@router.message(InChat())
-async def private_chat_echo(message: Message, state: FSMContext) -> None:
-    await state.clear()
-    
-    await message.answer(
-        text='Для связи с поддержкой нажмите на кнопку',
-        reply_markup=kb.support
-    )
-
-
 @router.message(InTopic(), FailCommand())
 async def fail_command_echo(message: Message) -> None:
     await message.answer('Этой команды не существует, попробуйте другую')
