@@ -1,5 +1,3 @@
-import datetime
-
 import app.utils.keyboards as kb
 
 from aiogram import Router, F
