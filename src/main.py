@@ -19,6 +19,7 @@ async def main() -> None:
     dp.shutdown.register(on_shutdown)
     
     dp.update.outer_middleware(middlewares.outer.AntiFlood(1))
+    dp.update.outer_middleware(middlewares.outer.AddToDatabase())
     
     dp.include_router(router)
     
