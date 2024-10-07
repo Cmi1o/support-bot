@@ -18,7 +18,7 @@ class AddToDatabase(BaseMiddleware):
         telegram_id = data['event_from_user'].id
         user = await controller.users.get_by(telegram_id=telegram_id)
         
-        if not user:
+        if not user and not data['event_from_user'].is_bot:
             await controller.users.add(
                 telegram_id=telegram_id,
                 request_time=datetime.now()
