@@ -9,7 +9,7 @@ from aiogram.types import Message
 
 from app.filters import InChat, InTopic
 from database import controller
-from .auth import router as auth_router
+from .support import router as auth_router
 
 
 router = Router()
