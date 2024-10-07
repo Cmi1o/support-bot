@@ -9,18 +9,6 @@ from aiogram.types import (
 
 remove = ReplyKeyboardRemove()
 
-registration = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [
-            InlineKeyboardButton(
-                text='Зарегистрироваться', 
-                callback_data='reg'
-            )
-        ]
-    ],
-    resize_keyboard=True,
-    one_time_keyboard=True
-)
 
 admin = InlineKeyboardMarkup(
     inline_keyboard=[
