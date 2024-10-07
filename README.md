@@ -48,7 +48,7 @@ Also you need to create new PostgreSQL database in accordance with this structur
 |users         | id           | int8(64,0); nextval('users_id_seq'::regclass); primary |
 |users         | telegram_id  | int8(64,0)                                             |
 |users         | thread_id    | int4(32,0); nullable                                   |
-|users         | added_time   | timestamp(6)                                           |
+|users         | request_time | timestamp(6)                                           |
 
 Besides this you need to create a new forum in Telegram, find out it's chat ID and add it to `.env`
 

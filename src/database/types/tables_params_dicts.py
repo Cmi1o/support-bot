@@ -12,7 +12,7 @@ __all__ = (
 class UpdateDataDict(TypedDict, total=False):
     telegram_id: int
     thread_id: int | None
-    added_time: datetime
+    request_time: datetime
 
 
 class FilterData(UpdateDataDict, total=False):

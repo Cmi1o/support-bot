@@ -33,7 +33,7 @@ async def private_chat_start(message: Message, state: FSMContext) -> None:
     if not await controller.users.get_by(telegram_id=message.from_user.id):
         await controller.users.add(
             telegram_id=message.from_user.id, 
-            added_time=datetime.datetime.now()
+            request_time=datetime.datetime.now()
         )
     
     await message.answer('Приветствую вас, этот бот поможет связаться вам с поддержкой')

@@ -31,7 +31,7 @@ async def registration(call: CallbackQuery) -> None:
         await call.message.answer('Подождите идет регистрация...', reply_markup=kb.remove)
         await controller.users.add(
             telegram_id=call.from_user.id, 
-            added_time=datetime.datetime.now()
+            request_time=datetime.datetime.now()
         )
         await call.message.answer('Регистрация прошла успешно', reply_markup=kb.support)
 

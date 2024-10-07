@@ -67,7 +67,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
     await controller.users.update_by(
         telegram_id=message.from_user.id,
         values={
-            'added_time': datetime.datetime.now()
+            'request_time': datetime.datetime.now()
         }
     )
     await message.answer(

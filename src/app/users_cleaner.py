@@ -14,7 +14,7 @@ class InactiveUsersCleaner:
     
     async def delete_old_requests(self) -> None:
         async for user in controller.users.get_all():
-            if (datetime.now() - user.added_time).days >= 14:
+            if (datetime.now() - user.request_time).days >= 14:
                 await topics.delete_topic(
                     self.__token,
                     self.__forum_id,
