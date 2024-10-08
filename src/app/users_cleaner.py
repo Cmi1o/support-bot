@@ -1,5 +1,7 @@
 import asyncio
 
+import constants
+
 from typing import NoReturn
 from datetime import datetime
 
@@ -27,4 +29,4 @@ class InactiveUsersCleaner:
             await asyncio.gather(
                 self.delete_old_requests()
             )
-            await asyncio.sleep(86_400)
+            await asyncio.sleep(constants.MAX_INACTIVE_TIME)
