@@ -9,11 +9,11 @@ from aiogram.types import Message
 
 from app.filters import InChat, InTopic
 from database import controller
-from .support import router as auth_router
+from .support import router as support_router
 
 
 router = Router()
-router.include_router(auth_router)
+router.include_router(support_router)
 
 
 @router.message(Command('help', ignore_case=True))
