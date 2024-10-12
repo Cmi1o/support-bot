@@ -1,4 +1,5 @@
 [tool.poetry]
+package-mode = false
 name = "support-bot"
 version = "0.1.0"
 authors = ["Georgiy Vasin <georgijvasin01@gmail.com>"]
