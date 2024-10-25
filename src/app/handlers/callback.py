@@ -20,7 +20,7 @@ async def end_dialog(call: CallbackQuery, state: FSMContext) -> None:
     await state.clear()
     
     if call.message:
-        await call.message.delete()
+        await call.message.delete()  # type: ignore
         await call.message.answer(
             text=(
                 'Спасибо за обращение! Вы всегда можете снова обратиться '

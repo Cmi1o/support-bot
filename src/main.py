@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.exceptions import TelegramNetworkError
 
@@ -11,7 +12,12 @@ from config import bot_token, forum_topic_id
 
 
 async def main() -> None:
-    bot = Bot(bot_token, parse_mode=ParseMode.HTML)
+    bot = Bot(
+        token=bot_token,
+        default=DefaultBotProperties(
+            parse_mode=ParseMode.HTML
+        )
+    )
     dp = Dispatcher()
     cleaner = InactiveUsersCleaner(bot_token, forum_topic_id)
     
