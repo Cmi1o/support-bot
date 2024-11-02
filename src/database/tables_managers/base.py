@@ -32,7 +32,7 @@ class ITableManager(ABC, Generic[MT]):
         '''
     
     @abstractmethod
-    def get_by(self, **filter_data: Unpack[FilterData]) -> MT | None:
+    async def get_by(self, **filter_data: Unpack[FilterData]) -> MT | None:
         '''Asynchronous method for getting row from table by `filter_data`
         
         Parameters
@@ -46,7 +46,7 @@ class ITableManager(ABC, Generic[MT]):
         '''
     
     @abstractmethod
-    def update_by(
+    async def update_by(
         self,
         values: UpdateDataDict,
         **filter_data: Unpack[FilterData]
@@ -62,7 +62,7 @@ class ITableManager(ABC, Generic[MT]):
         '''
     
     @abstractmethod
-    def add(self, **data: Unpack[AddData]) -> None:
+    async def add(self, **data: Unpack[AddData]) -> None:
         '''Add new row to table with given `data`
         
         Parameters
@@ -73,7 +73,7 @@ class ITableManager(ABC, Generic[MT]):
     
     
     @abstractmethod
-    def delete_by(self, **filter_data: Unpack[FilterData]) -> None:
+    async def delete_by(self, **filter_data: Unpack[FilterData]) -> None:
         '''Delete row from table by given `filter_data`
         
         Parameters
