@@ -1,1 +1,1 @@
-from .general import general_controller, GeneralController
+from .general import GeneralController, general_controller

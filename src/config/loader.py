@@ -7,11 +7,9 @@ class Settings(BaseSettings):
     admin_id: int
     database_url: PostgresDsn
     forum_topic_id: SecretStr
-    
+
     model_config = SettingsConfigDict(
-        env_file='.env',
-        env_file_encoding='utf-8',
-        case_sensitive=False
+        env_file='.env', env_file_encoding='utf-8', case_sensitive=False
     )
 
 

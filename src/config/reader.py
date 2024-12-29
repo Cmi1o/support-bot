@@ -2,13 +2,7 @@ from typing import Final as const
 
 from .loader import settings
 
-
-__all__ = (
-    'database_url', 
-    'bot_token', 
-    'admin_id', 
-    'forum_topic_id'
-)
+__all__ = ('database_url', 'bot_token', 'admin_id', 'forum_topic_id')
 
 
 database_url: const = str(settings.database_url)

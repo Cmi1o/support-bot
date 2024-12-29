@@ -1,5 +1,4 @@
 from database.models import User
-
 from database.tables_managers import Table
 
 

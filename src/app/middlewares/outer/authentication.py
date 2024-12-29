@@ -1,6 +1,5 @@
 from datetime import datetime
-from typing import Any, Dict
-from typing import Callable, Awaitable
+from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject
@@ -17,11 +16,10 @@ class Auth(BaseMiddleware):
     ) -> Any:
         telegram_id = data['event_from_user'].id
         user = await controller.users.get_by(telegram_id=telegram_id)
-        
+
         if not user and not data['event_from_user'].is_bot:
             await controller.users.add(
-                telegram_id=telegram_id,
-                request_time=datetime.now()
+                telegram_id=telegram_id, request_time=datetime.now()
             )
-        
+
         return await handler(event, data)

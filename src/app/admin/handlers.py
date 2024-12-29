@@ -1,17 +1,16 @@
-import app.utils.keyboards as kb
-import requests
-
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import CallbackQuery, Message
 
-from app.utils.states import AdminStates
+import app.utils.keyboards as kb
+import requests
 from app.filters import Admin, InChat
+from app.utils.states import AdminStates
 from database import controller
 
-
 router = Router()
+
 
 @router.message(Admin(), Command('admin_panel'), InChat())
 async def admin_panel(message: Message) -> None:
@@ -28,8 +27,8 @@ async def get_admin_message(call: CallbackQuery, state: FSMContext) -> None:
 async def send_mail(message: Message, state: FSMContext) -> None:
     await state.clear()
     await message.answer('Подождите идет рассылка...')
-    
+
     async for user in controller.users.get_all():
         await requests.send_copy(message, chat_id=user.telegram_id)
-    
+
     await message.answer('Рассылка завершена', reply_markup=kb.remove)

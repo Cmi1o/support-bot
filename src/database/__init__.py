@@ -1,4 +1,2 @@
-from .controllers import (
-    GeneralController,
-    general_controller as controller
-)
+from .controllers import GeneralController
+from .controllers import general_controller as controller

@@ -1,12 +1,7 @@
 from datetime import datetime
 from typing import TypedDict
 
-
-__all__ = (
-    'FilterData',
-    'UpdateDataDict',
-    'AddData'
-)
+__all__ = ('FilterData', 'UpdateDataDict', 'AddData')
 
 
 class UpdateDataDict(TypedDict, total=False):
