@@ -44,26 +44,30 @@ async def support_yes(message: Message, state: FSMContext) -> None:
     data = await state.get_data()
     user = await controller.users.get_by(telegram_id=message.from_user.id)
 
+    if not user:
+        await message.answer('Похоже, что вы не зарегистрированы в нашей системе')
+        return
+
     await state.clear()
 
-    if user and not user.thread_id:
+    if not user.thread_id:
         topic_response = await topics.create_topic(
             bot_token=bot_token,
             forum_id=forum_topic_id,
             name=f'Обращение №{user.id}',
         )
         topic_response = await topic_response.json()
+        thread_id = topic_response['result']['message_thread_id']
 
         await controller.users.update_by(
-            telegram_id=user.telegram_id,
-            values={'thread_id': topic_response['result']['message_thread_id']},
+            telegram_id=user.telegram_id, values={'thread_id': thread_id}
         )
-        user = await controller.users.get_by(telegram_id=message.from_user.id)
+        user.thread_id = thread_id
 
     await requests.send_copy(
         message=data['message'],
         chat_id=forum_topic_id,
-        message_thread_id=user.thread_id,  # type: ignore
+        message_thread_id=user.thread_id,
     )
     await controller.users.update_by(
         telegram_id=message.from_user.id,
