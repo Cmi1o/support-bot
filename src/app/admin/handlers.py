@@ -19,8 +19,11 @@ async def admin_panel(message: Message) -> None:
 
 @router.callback_query(Admin(), F.data == 'mail')
 async def get_admin_message(call: CallbackQuery, state: FSMContext) -> None:
+    if not call.message:
+        return
+
     await state.set_state(AdminStates.get_msg)
-    await call.message.answer('Пришлите ваше сообщение для рассылки')  # type: ignore
+    await call.message.answer('Пришлите ваше сообщение для рассылки')
 
 
 @router.message(AdminStates.get_msg)
