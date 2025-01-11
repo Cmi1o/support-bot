@@ -15,7 +15,9 @@ from config import bot_token, forum_topic_id
 
 async def main() -> None:
     bot = Bot(
-        token=bot_token, default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN)
+        token=bot_token,
+        session=AiohttpSession(),
+        default=DefaultBotProperties(parse_mode=ParseMode.MARKDOWN),
     )
     dp = Dispatcher()
     cleaner = InactiveUsersCleaner(bot_token, forum_topic_id)
