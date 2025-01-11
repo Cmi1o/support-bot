@@ -1,12 +1,14 @@
 import asyncio
+import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
+from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.enums import ParseMode
 from aiogram.exceptions import TelegramNetworkError
 
 from app import middlewares
-from app.dispatcher_builder import *
+from app.dispatcher_settings import *
 from app.users_cleaner import InactiveUsersCleaner
 from config import bot_token, forum_topic_id
 
@@ -30,8 +32,12 @@ async def main() -> None:
 
 
 if __name__ == '__main__':
+    logging.basicConfig(
+        level=logging.INFO, format='[%(asctime)s] [%(levelname)s] %(message)s'
+    )
+
     try:
         asyncio.run(main())
     except (KeyboardInterrupt, TelegramNetworkError) as error:
         if isinstance(error, TelegramNetworkError):
-            print('Network error')
+            logging.error('Network error')
