@@ -6,7 +6,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
 import app.utils.keyboards as kb
-from app.filters import InChat, InTopic
+from app.filters import InPrivateChat, InTopic
 from database import controller
 
 from .support import router as support_router
@@ -23,7 +23,7 @@ async def help(message: Message) -> None:
     )
 
 
-@router.message(CommandStart(ignore_case=True), InChat())
+@router.message(CommandStart(ignore_case=True), InPrivateChat())
 async def private_chat_start(message: Message, state: FSMContext) -> None:
     if not message.from_user:
         return

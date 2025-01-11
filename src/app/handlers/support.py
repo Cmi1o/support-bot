@@ -31,9 +31,8 @@ async def support_get_msg(message: Message, state: FSMContext) -> None:
         'Если желаете переписать введите "Нет"', reply_markup=kb.confirm
     )
 
-    await state.update_data(
-        message=message
-    )  # message data of json: aiogram.types.Message
+    # message data of json: aiogram.types.Message
+    await state.update_data(message=message)
     await state.set_state(SupportStates.confirm)
 
 

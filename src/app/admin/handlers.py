@@ -5,14 +5,14 @@ from aiogram.types import CallbackQuery, Message
 
 import app.utils.keyboards as kb
 import requests
-from app.filters import Admin, InChat
+from app.filters import Admin, InPrivateChat
 from app.utils.states import AdminStates
 from database import controller
 
 router = Router()
 
 
-@router.message(Admin(), Command('admin_panel'), InChat())
+@router.message(Admin(), Command('admin_panel'), InPrivateChat())
 async def admin_panel(message: Message) -> None:
     await message.answer('Возможные команды админа:', reply_markup=kb.admin)
 
