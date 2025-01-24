@@ -1,2 +1,2 @@
-from .controllers import GeneralController
-from .controllers import general_controller as controller
+from .services import GeneralService
+from .services import general_service as service

@@ -4,7 +4,7 @@ from typing import AsyncGenerator, Generic, Unpack
 from database.types import *
 
 
-class ITableManager(ABC, Generic[MT]):
+class ITableController(ABC, Generic[MT]):
     def __init__(self, table: MT) -> None:
         self._table = type(table)
 

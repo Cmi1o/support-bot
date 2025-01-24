@@ -7,7 +7,7 @@ import app.utils.keyboards as kb
 import requests
 from app.filters import Admin, InPrivateChat
 from app.utils.states import AdminStates
-from database import controller
+from database import service
 
 router = Router()
 
@@ -31,7 +31,7 @@ async def send_mail(message: Message, state: FSMContext) -> None:
     await state.clear()
     await message.answer('Подождите идет рассылка...')
 
-    async for user in controller.users.get_all():
+    async for user in service.users.get_all():
         await requests.send_copy(message, chat_id=user.telegram_id)
 
     await message.answer('Рассылка завершена', reply_markup=kb.remove)

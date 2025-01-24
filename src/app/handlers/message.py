@@ -4,7 +4,7 @@ from aiogram.types import Message
 import requests
 from app.filters import FailCommand, InTopic
 from config import bot_token
-from database import controller
+from database import service
 
 router = Router()
 
@@ -19,7 +19,7 @@ async def fail_command_echo(message: Message) -> None:
     F.text | F.photo | F.document | F.audio | F.video | F.voice | F.video_note,
 )
 async def topic_echo(message: Message) -> None:
-    user = await controller.users.get_by(thread_id=message.message_thread_id)
+    user = await service.users.get_by(thread_id=message.message_thread_id)
 
     if user and user.telegram_id:
         await requests.send_message(

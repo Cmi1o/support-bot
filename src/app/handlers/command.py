@@ -7,7 +7,7 @@ from aiogram.types import Message
 
 import app.utils.keyboards as kb
 from app.filters import InPrivateChat, InTopic
-from database import controller
+from database import service
 
 from .support import router as support_router
 
@@ -30,8 +30,8 @@ async def private_chat_start(message: Message, state: FSMContext) -> None:
 
     await state.clear()
 
-    if not await controller.users.get_by(telegram_id=message.from_user.id):
-        await controller.users.add(
+    if not await service.users.get_by(telegram_id=message.from_user.id):
+        await service.users.add(
             telegram_id=message.from_user.id, request_time=datetime.datetime.now()
         )
 

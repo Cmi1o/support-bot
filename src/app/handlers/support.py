@@ -9,7 +9,7 @@ import requests
 from app.utils import topics
 from app.utils.states import SupportStates
 from config import bot_token, forum_topic_id
-from database import controller
+from database import service
 
 router = Router()
 
@@ -42,7 +42,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         return
 
     data = await state.get_data()
-    user = await controller.users.get_by(telegram_id=message.from_user.id)
+    user = await service.users.get_by(telegram_id=message.from_user.id)
 
     if not user:
         await message.answer('Похоже, что вы не зарегистрированы в нашей системе')
@@ -59,7 +59,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         topic_response = await topic_response.json()
         thread_id = topic_response['result']['message_thread_id']
 
-        await controller.users.update_by(
+        await service.users.update_by(
             telegram_id=user.telegram_id, values={'thread_id': thread_id}
         )
         user.thread_id = thread_id
@@ -69,7 +69,7 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         chat_id=forum_topic_id,
         message_thread_id=user.thread_id,
     )
-    await controller.users.update_by(
+    await service.users.update_by(
         telegram_id=message.from_user.id,
         values={'request_time': datetime.datetime.now()},
     )

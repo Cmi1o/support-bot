@@ -6,10 +6,10 @@ from sqlalchemy import sql
 from database.core import session_factory
 from database.types import AddData, FilterData, NegativeSettingsDict, UpdateDataDict
 
-from .base import MT, ITableManager
+from .base import MT, ITableController
 
 
-class Table(ITableManager[MT]):
+class Table(ITableController[MT]):
     async def get_all(
         self,
         *,
