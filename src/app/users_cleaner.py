@@ -30,5 +30,5 @@ class InactiveUsersCleaner:
 
     async def start_polling(self) -> NoReturn:
         while True:
-            await asyncio.gather(self.delete_old_requests())
+            await self.delete_old_requests()
             await asyncio.sleep(constants.MAX_INACTIVE_TIME)
