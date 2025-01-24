@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
@@ -59,20 +59,19 @@ async def support_yes(message: Message, state: FSMContext) -> None:
         topic_response = await topic_response.json()
         thread_id = topic_response['result']['message_thread_id']
 
-        await service.users.update_by(
-            telegram_id=user.telegram_id, values={'thread_id': thread_id}
-        )
+        await service.users.update_by(id=user.id, values={'thread_id': thread_id})
         user.thread_id = thread_id
 
     await requests.send_copy(
         message=data['message'],
         chat_id=forum_topic_id,
         message_thread_id=user.thread_id,
-    )
+    )  # send message to forum topic
+
     await service.users.update_by(
-        telegram_id=message.from_user.id,
-        values={'request_time': datetime.datetime.now()},
+        id=user.id, values={'request_time': datetime.now()}
     )
+
     await message.answer(
         text='Ваше сообщение отправлено администратору', reply_markup=kb.remove
     )

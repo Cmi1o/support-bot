@@ -9,7 +9,7 @@ from database import service
 router = Router()
 TRedirectMessage = (
     F.text | F.photo | F.document | F.audio | F.video | F.voice | F.video_note
-)
+)  # All types of messages that can be redirected
 
 
 @router.message(InTopic(), FailCommand())

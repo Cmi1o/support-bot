@@ -15,6 +15,7 @@ async def on_startup(bot: Bot) -> None:
     bot_in_log = await LoggingBot(bot).in_log()
 
     async with engine.begin() as conn:
+        # Create all tables if not exists
         await conn.run_sync(Base.metadata.create_all)
 
     await bot.delete_webhook()

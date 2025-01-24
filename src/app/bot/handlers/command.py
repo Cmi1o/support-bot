@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from aiogram import Router
 from aiogram.filters import Command, CommandStart
@@ -32,7 +32,7 @@ async def private_chat_start(message: Message, state: FSMContext) -> None:
 
     if not await service.users.get_by(telegram_id=message.from_user.id):
         await service.users.add(
-            telegram_id=message.from_user.id, request_time=datetime.datetime.now()
+            telegram_id=message.from_user.id, request_time=datetime.now()
         )
 
     await message.answer(
