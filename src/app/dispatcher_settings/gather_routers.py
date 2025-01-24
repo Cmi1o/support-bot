@@ -1,7 +1,7 @@
 from aiogram import Router
 
-from app.admin import handlers as admin_message
-from app.handlers import callback, command, message
+from app.bot.admin import handlers as admin_message
+from app.bot.handlers import callback, command, message
 
 
 def gather_routers(*routers: Router) -> Router:

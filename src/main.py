@@ -7,7 +7,7 @@ from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.enums import ParseMode
 from aiogram.exceptions import TelegramNetworkError
 
-from app import middlewares
+from app.bot import middlewares
 from app.dispatcher_settings import *
 from app.users_cleaner import InactiveUsersCleaner
 from config import bot_token, forum_topic_id

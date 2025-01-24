@@ -4,10 +4,10 @@ from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
-import app.utils.keyboards as kb
+import app.bot.utils.keyboards as kb
 import requests
-from app.utils import topics
-from app.utils.states import SupportStates
+from app.bot.utils import topics
+from app.bot.utils.states import SupportStates
 from config import bot_token, forum_topic_id
 from database import service
 

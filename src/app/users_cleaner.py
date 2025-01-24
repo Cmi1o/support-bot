@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import NoReturn
 
 import constants
-from app.utils import topics
+from app.bot.utils import topics
 from database import service
 
 

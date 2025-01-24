@@ -5,8 +5,8 @@ from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
 
-import app.utils.keyboards as kb
-from app.filters import InPrivateChat, InTopic
+import app.bot.utils.keyboards as kb
+from app.bot.filters import InPrivateChat, InTopic
 from database import service
 
 from .support import router as support_router

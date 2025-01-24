@@ -2,8 +2,8 @@ from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-import app.utils.keyboards as kb
-from app.utils.states import SupportStates
+import app.bot.utils.keyboards as kb
+from app.bot.utils.states import SupportStates
 
 router = Router()
 

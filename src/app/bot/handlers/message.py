@@ -2,7 +2,7 @@ from aiogram import F, Router
 from aiogram.types import Message
 
 import requests
-from app.filters import FailCommand, InTopic
+from app.bot.filters import FailCommand, InTopic
 from config import bot_token
 from database import service
 

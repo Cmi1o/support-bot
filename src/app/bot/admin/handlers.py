@@ -3,10 +3,10 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
-import app.utils.keyboards as kb
+import app.bot.utils.keyboards as kb
 import requests
-from app.filters import Admin, InPrivateChat
-from app.utils.states import AdminStates
+from app.bot.filters import Admin, InPrivateChat
+from app.bot.utils.states import AdminStates
 from database import service
 
 router = Router()
