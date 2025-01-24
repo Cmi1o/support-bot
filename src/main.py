@@ -30,7 +30,8 @@ async def main() -> None:
 
     dp.include_router(router)
 
-    await asyncio.gather(dp.start_polling(bot), cleaner.start_polling())
+    await dp.start_polling(bot)
+    await cleaner.start_polling()
 
 
 if __name__ == '__main__':
