@@ -2,7 +2,7 @@ from aiogram import Bot
 from aiogram.types import BotName
 
 
-class LogBot:
+class LoggingBot:
     def __init__(self, bot: Bot) -> None:
         self.bot = bot
 

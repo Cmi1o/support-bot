@@ -4,7 +4,7 @@ from aiogram import Bot
 
 from database.core import Base, engine
 
-from .logging_bot import LogBot
+from .logging_bot import LoggingBot
 
 __all__ = ('on_startup', 'on_shutdown')
 
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 async def on_startup(bot: Bot) -> None:
-    bot_in_log = await LogBot(bot).in_log()
+    bot_in_log = await LoggingBot(bot).in_log()
 
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
@@ -22,7 +22,7 @@ async def on_startup(bot: Bot) -> None:
 
 
 async def on_shutdown(bot: Bot) -> None:
-    bot_in_log = await LogBot(bot).in_log()
+    bot_in_log = await LoggingBot(bot).in_log()
 
     await bot.session.close()
     logger.info(f'Finished polling for {bot_in_log}')
