@@ -1,50 +1,80 @@
-from typing import AsyncGenerator, Generic
+from datetime import datetime
+from typing import AsyncGenerator, Unpack
 
 from sqlalchemy import sql
 
 from database.core import session_factory
-from database.types import MT
+from database.types import AddData, FilterData, NegativeSettingsDict, UpdateDataDict
 
-from .base import ITableManager
+from .base import MT, ITableManager
 
 
-class Table(ITableManager, Generic[MT]):
-    def __init__(self, table: MT) -> None:
-        self.__table = type(table)
-
-    async def get_all(self) -> AsyncGenerator[MT, None]:
-        stmt = sql.select(self.__table)
-
+class Table(ITableManager[MT]):
+    async def get_all(
+        self,
+        *,
+        table_index: int = 0,
+        negative_settings: NegativeSettingsDict | None = None,
+        **filter_data: Unpack[FilterData]
+    ) -> AsyncGenerator[MT, None]:
         async with session_factory() as session:
+            stmt = (
+                sql.select(self._table)
+                .filter_by(**filter_data)
+                .filter(*self._convert_settings(negative_settings))
+            )
             async for row in await session.stream(stmt):
-                yield row[0]
+                yield row[table_index]
 
-    async def get_many_with(self, **filter_data) -> AsyncGenerator[MT, None]:
-        stmt = sql.select(self.__table).filter_by(**filter_data)
-
-        async with session_factory() as session:
-            async for row in await session.stream(stmt):
-                yield row[0]
-
-    async def get_by(self, **filter_data) -> MT | None:
+    async def get_by(
+        self,
+        *,
+        negative_settings: NegativeSettingsDict | None = None,
+        **filter_data: Unpack[FilterData]
+    ) -> MT | None:
         async with session_factory() as session:
             return await session.scalar(
-                sql.select(self.__table).filter_by(**filter_data)
+                sql.select(self._table)
+                .filter_by(**filter_data)
+                .filter(*self._convert_settings(negative_settings))
             )
 
-    async def update_by(self, values, **filter_data) -> None:
-        stmt = sql.update(self.__table).filter_by(**filter_data)
+    async def update_by(
+        self,
+        *,
+        values: UpdateDataDict,
+        negative_settings: NegativeSettingsDict | None = None,
+        **filter_data: Unpack[FilterData]
+    ) -> None:
+        values['updated_at'] = datetime.now()
 
         async with session_factory() as session:
+            stmt = (
+                sql.update(self._table)
+                .filter_by(**filter_data)
+                .filter(*self._convert_settings(negative_settings))
+            )
             await session.execute(stmt.values(**values))
             await session.commit()
 
-    async def add(self, **data) -> None:
+    async def delete_by(
+        self,
+        *,
+        negative_settings: NegativeSettingsDict | None = None,
+        **filter_data: Unpack[FilterData]
+    ) -> None:
         async with session_factory() as session:
-            session.add(self.__table(**data))
+            await session.execute(
+                sql.delete(self._table)
+                .filter_by(**filter_data)
+                .filter(*self._convert_settings(negative_settings))
+            )
             await session.commit()
 
-    async def delete_by(self, **filter_data) -> None:
+    async def add(self, **data: Unpack[AddData]) -> None:
+        data['created_at'] = datetime.now()
+        data['updated_at'] = datetime.now()
+
         async with session_factory() as session:
-            await session.execute(sql.delete(self.__table).filter_by(**filter_data))
+            session.add(self._table(**data))
             await session.commit()
