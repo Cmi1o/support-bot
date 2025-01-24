@@ -12,6 +12,14 @@ class InactiveUsersCleaner:
         self.__token = bot_token
         self.__forum_id = forum_topic_id
 
+    @property
+    def token(self) -> str:
+        return self.__token
+
+    @property
+    def forum_id(self) -> int | str:
+        return self.__forum_id
+
     async def delete_old_requests(self) -> None:
         async for user in service.users.get_all():
             if (datetime.now() - user.request_time).days >= 14:
