@@ -72,8 +72,7 @@ class Table(ITableController[MT]):
             await session.commit()
 
     async def add(self, **data: Unpack[AddData]) -> None:
-        data['created_at'] = datetime.now()
-        data['updated_at'] = datetime.now()
+        data['created_at'] = data['updated_at'] = datetime.now()
 
         async with session_factory() as session:
             session.add(self._table(**data))
