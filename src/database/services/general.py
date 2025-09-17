@@ -1,5 +1,5 @@
-from database.models import User
 from database.controllers import Table
+from database.models import User
 
 
 class GeneralService:

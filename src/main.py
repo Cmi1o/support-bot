@@ -25,7 +25,7 @@ async def main() -> None:
     dp.startup.register(on_startup)
     dp.shutdown.register(on_shutdown)
 
-    dp.update.outer_middleware(middlewares.outer.AntiFlood(1))
+    dp.update.outer_middleware(middlewares.outer.AntiFlood(time_limit=1))
     dp.update.outer_middleware(middlewares.outer.Auth())
 
     dp.include_router(router)
